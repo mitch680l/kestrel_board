@@ -82,7 +82,11 @@ encrypted_blob:
   address: 0xfbe00 
   size: 0x2000
   region: flash_primary
-  
+flash_gap_filler:
+  address: 0xFDE00
+  size: 0x2100 
+  region: flash_primary
+
 mcuboot_secondary:
   device: DT_CHOSEN(nordic_pm_ext_flash)
   address: 0x0
