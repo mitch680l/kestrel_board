@@ -76,9 +76,13 @@ tfm_nonsecure:
   region: flash_primary
 app:
   address: 0x48000
-  size: 0xb6000
+  size: 0xb5e00
   region: flash_primary
-
+encrypted_blob:
+  address: 0xfd000
+  size: 0x200
+  region: flash_primary
+  
 mcuboot_secondary:
   device: DT_CHOSEN(nordic_pm_ext_flash)
   address: 0x0
