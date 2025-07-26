@@ -76,11 +76,11 @@ tfm_nonsecure:
   region: flash_primary
 app:
   address: 0x48000
-  size: 0xb5e00
+  size: 0xb3e00
   region: flash_primary
 encrypted_blob:
-  address: 0xFDF00
-  size: 0x2100 
+  address: 0xfbe00 
+  size: 0x2000
   region: flash_primary
   
 mcuboot_secondary:
