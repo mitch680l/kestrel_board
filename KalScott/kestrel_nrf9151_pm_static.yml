@@ -79,9 +79,11 @@ app:
   size: 0xb5e00
   region: flash_primary
 encrypted_blob:
-  address: 0xfd000
-  size: 0x200
+  address: 0xFF800
+  size: 0x800  # or however much you want
   region: flash_primary
+  placement:
+    before: end
   
 mcuboot_secondary:
   device: DT_CHOSEN(nordic_pm_ext_flash)
