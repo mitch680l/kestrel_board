@@ -80,7 +80,7 @@ app:
   region: flash_primary
 encrypted_blob:
   address: 0xfb400
-  size: 0x4400
+  size: 0x4c00
   region: flash_primary
 
 mcuboot_secondary:
