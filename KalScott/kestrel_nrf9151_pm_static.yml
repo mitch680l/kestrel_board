@@ -79,7 +79,7 @@ app:
   size: 0xb3c00
   region: flash_primary
 encrypted_blob:
-  address: 0xfbe00
+  address: 0xfb400
   size: 0x4400
   region: flash_primary
 
