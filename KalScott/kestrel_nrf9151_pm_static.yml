@@ -43,8 +43,11 @@ s1_image:
   region: flash_primary
 mcuboot_primary:
   address: 0x30000
-  size: 0xD0000
-  span: [mcuboot_pad, app, tfm]
+  size: 0xCFC00
+  region: flash_primary
+tlv_pad:
+  address: 0xffc00
+  size: 0x400
   region: flash_primary
 tfm_secure:
   address: 0x30000
