@@ -81,9 +81,19 @@ app:
   address: 0x48000
   size: 0xb3c00
   region: flash_primary
-encrypted_blob:
-  address: 0xfb400
-  size: 0x4c00
+encrypted_blob_slot0:
+  address: 0x000FB400
+  size: 0x00002400
+  region: flash_primary
+
+encrypted_blob_slot1:
+  address: 0x000FD800
+  size: 0x00002400  
+  region: flash_primary
+
+encrypted_blob_pad:
+  address: 0x000FFC00
+  size: 0x000000C0  
   region: flash_primary
 
 mcuboot_secondary:
