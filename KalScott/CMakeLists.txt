@@ -1,4 +1,4 @@
-# Kconfig - nRF91 Thingy:91 X board configuration
+# Kconfig - nRF9151 Kestrel board configuration
 #
 # Copyright (c) 2024 Nordic Semiconductor
 # SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
@@ -11,11 +11,7 @@ if(CONFIG_BOARD_KESTREL_NRF9151_NS)
   set(PM_STATIC_YML_FILE ${CMAKE_CURRENT_LIST_DIR}/kestrel_nrf9151_pm_static.yml CACHE INTERNAL "")
 endif()
 
-# If the BMM350 driver is not used, use a minimal initialization instead to save power.
-# Once a driver is available in the Zephyr tree, this can be removed.
-if (CONFIG_SENSOR AND CONFIG_REGULATOR AND CONFIG_I2C AND NOT CONFIG_BMM350)
-  zephyr_library_named(bmm350_init_minimal)
-  zephyr_library_sources(bmm350_init_minimal.c)
-endif()
+# BMM350 minimal initialization removed - using AK09918C magnetometer instead
+# The BMM350-specific power optimization is not applicable to AK09918C
 
 

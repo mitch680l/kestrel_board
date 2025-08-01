@@ -1,4 +1,4 @@
-# Thingy:91 X nRF9151 board configuration
+# Kestrel nRF9151 board configuration
 #
 # Copyright (c) 2024 Nordic Semiconductor
 # SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
@@ -39,7 +39,7 @@ if BOARD_KESTREL && TRUSTED_EXECUTION_SECURE
 config FLASH_LOAD_SIZE
 	default $(dt_chosen_reg_size_hex,$(DT_CHOSEN_Z_CODE_PARTITION))
 
-endif # BOARD_THINGY91X && TRUSTED_EXECUTION_SECURE
+endif # BOARD_KESTREL && TRUSTED_EXECUTION_SECURE
 
 if BOARD_KESTREL_NRF9151_NS
 
@@ -49,7 +49,7 @@ config FLASH_LOAD_OFFSET
 config FLASH_LOAD_SIZE
 	default $(dt_chosen_reg_size_hex,$(DT_CHOSEN_Z_CODE_PARTITION))
 
-endif # BOARD_THINGY91X_NRF9151_NS
+endif # BOARD_KESTREL_NRF9151_NS
 
 config BT_HCI_VS
 	default y if BT
@@ -106,4 +106,4 @@ config GPIO_NPM1300
 
 endif # IS_BOOTLOADER_IMG
 
-endif # BOARD_THINGY91X_NRF9151 || BOARD_THINGY91X_NRF9151_NS
+endif # BOARD_KESTREL_NRF9151 || BOARD_KESTREL_NRF9151_NS

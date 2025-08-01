@@ -1,0 +1,30 @@
+/*
+ * Example overlay to enable sensors on Kestrel nRF9151 board
+ * 
+ * Copy this file to your application as an overlay to enable the sensors:
+ * - AK09918C magnetometer (I2C)
+ * - BMP390 pressure sensor (I2C) 
+ * - ICM-42688-P IMU (SPI)
+ *
+ * Usage: Copy to your app directory and build with:
+ *   west build -b kestrel/nrf9151/ns -- -DDTC_OVERLAY_FILE=sensors_enable_example.overlay
+ */
+
+/* Enable I2C sensors */
+&magnetometer {
+    status = "okay";
+};
+
+&pressure {
+    status = "okay";
+};
+
+/* Enable SPI sensor */
+&imu {
+    status = "okay";
+};
+
+/* Optional: Enable sensor power supply if needed */
+&ldsw_sensors {
+    status = "okay"; 
+};

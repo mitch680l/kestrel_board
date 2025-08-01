@@ -54,9 +54,9 @@
 			pwms = <&pwm0 1 PWM_MSEC(8) PWM_POLARITY_NORMAL>;
 		};
 	};
-	zephyr,user {
-		nrf5340-reset-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
-	};
+	/* zephyr,user {
+		// nrf5340-reset-gpios removed - not applicable to standalone nRF9151
+	}; */
 
 	aliases {
 		sw0 = &button0;
@@ -85,11 +85,13 @@
 	/* Use PORT event rather than GPIOTE IN event, to save power */
 	sense-edge-mask = <0xffffffff>;
 	/* Load switch controlling 3.3V supply and I/O voltage for external boards */
+	/* Disabled for standalone nRF9151 - re-enable if you have expansion connectors that need power switching
 	exp_board_enable: exp_board_enable {
 		gpio-hog;
 		output-low;
 		gpios = <3 GPIO_ACTIVE_HIGH>;
 	};
+	*/
 };
 
 /* PWM0 is intended for RGB LED control */
@@ -103,34 +105,29 @@
 &pmic_main {
 	host-int-gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>; //INT1
 };
-&accelerometer_hp {
-	irq-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>; //INT2
+/* Sensor interrupt pin assignments - disabled by default */
+&imu {
+	int1-gpios = <&gpio0 11 GPIO_ACTIVE_LOW>; //INT4 - ICM42688 INT1
+	// int2-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>; //INT2 - ICM42688 INT2 (optional)
 };
-&magnetometer {
-	drdy-gpios = <&gpio0 7 GPIO_ACTIVE_LOW>; //INT3
-};
-&accelerometer_lp {
-	int1-gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>; //INT4
+/* AK09918C magnetometer - no interrupt pin used */
+&pressure {
+	int-gpios = <&gpio0 12 GPIO_ACTIVE_LOW>; //INT5 - BMP390 INT
 };
 
 &flash_ext {
 	status = "okay";
 };
 
-&nrf70 {
-	iovdd-ctrl-gpios = <&gpio0 27 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-	bucken-gpios = <&gpio0 28 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-	host-irq-gpios = <&gpio0 16 GPIO_ACTIVE_HIGH>;
-};
+
 
 &i2c2 {
 	status = "okay";
 };
 &spi3 {
 	status = "okay";
-	cs-gpios = <&gpio0 12 GPIO_ACTIVE_LOW>, // FLASH_CS
-		   <&gpio0 17 GPIO_ACTIVE_LOW>, // WIFI_CS
-		   <&gpio0 10 GPIO_ACTIVE_LOW>; // BMI270_CS
+	cs-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>, // FLASH_CS (CS0)
+		   <&gpio0 22 GPIO_ACTIVE_LOW>; // ICM42688_CS (CS1)
 };
 
 &pmic_main {
@@ -167,13 +164,11 @@
 	pinctrl-names = "default", "sleep";
 };
 
+/* UART1 disabled - not present in standalone nRF9151 design
 &uart1 {
-	current-speed = <1000000>;
-	status = "okay";
-	pinctrl-0 = <&uart1_default>;
-	pinctrl-1 = <&uart1_sleep>;
-	pinctrl-names = "default", "sleep";
+	status = "disabled";
 };
+*/
 
 /* Include default memory partition configuration file. */
 /* This is not the layout that's actually used! It's overridden by Partition Manager. */

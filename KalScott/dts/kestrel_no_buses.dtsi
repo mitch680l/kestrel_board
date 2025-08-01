@@ -11,18 +11,7 @@
 	status = "disabled";
 };
 
-/* disable pmic_wifi */
-&pmic_wifi {
-	status = "disabled";
-	regulators {
-		status = "disabled";
-	};
-};
 
-/* disable nrf70 */
-&nrf70 {
-	status = "disabled";
-};
 
 /* disable external flash */
 &flash_ext {
