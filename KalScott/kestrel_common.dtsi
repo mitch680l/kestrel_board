@@ -5,12 +5,22 @@
 
 #include <dt-bindings/regulator/npm1300.h>
 
+/* I2C1 for LED control */
+&i2c1 {
+	compatible = "nordic,nrf-twim";
+	status = "disabled";
+	clock-frequency = <I2C_BITRATE_STANDARD>;
+
+	pinctrl-0 = <&i2c1_default>;
+	pinctrl-1 = <&i2c1_sleep>;
+	pinctrl-names = "default", "sleep";
+};
 
 &i2c2 {
 	compatible = "nordic,nrf-twim";
 	status = "disabled";
 	clock-frequency = <I2C_BITRATE_STANDARD>;
-
+	
 	pinctrl-0 = <&i2c2_default>;
 	pinctrl-1 = <&i2c2_sleep>;
 	pinctrl-names = "default", "sleep";
@@ -27,6 +37,7 @@
 		pmic-int-pin = <3>;
 		reg = <0x6b>;
 
+		
 		gpios_pmic: npm1300_gpios {
 			compatible = "nordic,npm1300-gpio";
 			status = "disabled";
@@ -37,12 +48,12 @@
 				gpio-hog;
 				gpios = <0 GPIO_ACTIVE_HIGH>;
 			};
-
+		
 			power_switch: GPIO2 {
 				gpio-hog;
 				gpios = <2 GPIO_ACTIVE_HIGH>;
 			};
-
+			
 		};
 
 		regulators {
@@ -54,7 +65,12 @@
 				regulator-max-microvolt = <3300000>;
 				enable-gpios = <&gpios_pmic 2 GPIO_ACTIVE_HIGH>;
 			};
-
+			/* LDO1 is used as a load switch pulling the nPM6001 enable line to VSYS */
+			ldsw_nPM6001_en: LDO1 {
+				regulator-initial-mode = <NPM1300_LDSW_MODE_LDSW>;
+				regulator-allowed-modes = <NPM1300_LDSW_MODE_LDSW>;
+				regulator-boot-off;
+			};
 			/* LDO2 is used as a load switch for sensor power supply */
 			ldsw_sensors: LDO2 {
 				regulator-initial-mode = <NPM1300_LDSW_MODE_LDSW>;
@@ -81,11 +97,9 @@
 		};
 	};
 
+	
 
 
-	/* Sensor placeholder nodes - enable and configure when drivers are available */
-	/* magnetometer: ak09918c@0c - I2C address 0x0c */
-	/* pressure: bmp390@76 - I2C address 0x76 */
 };
 
 &spi3 {
