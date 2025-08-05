@@ -16,8 +16,25 @@
 	};
 };
 
-/* Disable Zephyr driver for UART1. This port is reserved for modem traces and T-FM logging.
- */
-&uart1 {
+/* UART1 completely removed for GNSS I2C implementation */
+
+&power {
+	status = "okay";
+};
+
+&ipc {
+	status = "okay";
+};
+
+&gpiote {
+	status = "okay";
+};
+
+&uart0 {
+	compatible = "nordic,nrf-uarte";
+	current-speed = <115200>;
+};
+
+&systick {
 	status = "disabled";
 };

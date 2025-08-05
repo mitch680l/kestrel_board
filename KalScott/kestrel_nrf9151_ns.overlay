@@ -1,6 +1,11 @@
+&i2c1 {
+	status = "okay";
+	clock-frequency = <I2C_BITRATE_STANDARD>;
+};
+
 &i2c2 {
 	status = "okay";
-	clock-frequency = <I2C_BITRATE_FAST>;
+	clock-frequency = <I2C_BITRATE_STANDARD>;
     zephyr,concat-buf-size = <64>;
     zephyr,flash-buf-max-size = <64>;
 };
@@ -13,6 +18,18 @@
 	};
 };
 
+&bme680 {
+	status = "okay";
+};
+
+&pmic_main {
+	status = "okay";
+};
+
+&gpios_pmic {
+	status = "okay";
+};
+
 &flash_ext {
     status = "okay";
 };
@@ -20,3 +37,4 @@
 &spi3 {
 	status = "okay";
 };
+
