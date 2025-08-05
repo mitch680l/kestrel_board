@@ -1,4 +1,7 @@
-
+/*
+ * Copyright (c) 2024 Nordic Semiconductor
+ * SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+ */
 
 #include "kestrel_nrf9151_common-pinctrl.dtsi"
 #include "kestrel_common.dtsi"
