@@ -1,0 +1,44 @@
+/*
+ * Example overlay to add sensors to Kestrel nRF9151 board
+ * 
+ * This file shows how to add sensor definitions when you have drivers available.
+ * Hardware connections:
+ * - AK09918C magnetometer: I2C address 0x0c, no interrupt
+ * - BMP390 pressure sensor: I2C address 0x76, interrupt on GPIO0.12
+ * - ICM-42688-P IMU: SPI reg=<2>, CS on GPIO0.22, interrupt on GPIO0.11
+ *
+ * Usage: Copy to your app directory and build with:
+ *   west build -b kestrel/nrf9151/ns -- -DDTC_OVERLAY_FILE=sensors_enable_example.overlay
+ */
+
+/* Add I2C sensors to I2C2 bus */
+&i2c2 {
+    magnetometer: ak09918c@0c {
+        compatible = "asahi-kasei,akm09918c";
+        reg = <0x0c>;
+        status = "okay";
+    };
+
+    pressure: bmp390@76 {
+        compatible = "bosch,bmp390";
+        reg = <0x76>;
+        status = "okay";
+        int-gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
+    };
+};
+
+/* Add SPI sensor to SPI3 bus */
+&spi3 {
+    imu: icm42688@2 {
+        compatible = "invensense,icm42688";
+        reg = <2>;
+        spi-max-frequency = <DT_FREQ_M(10)>;
+        status = "okay";
+        int1-gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
+    };
+};
+
+/* Enable sensor power supply */
+&ldsw_sensors {
+    status = "okay"; 
+};

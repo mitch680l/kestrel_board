@@ -6,14 +6,14 @@ choice BOOTLOADER
 endchoice
 
 choice
-	prompt "Pre-defined Thingy:91 X partition layout"
+	prompt "Pre-defined Kestrel partition layout"
 	default KESTREL_STATIC_PARTITIONS_FACTORY
 
 config KESTREL_STATIC_PARTITIONS_FACTORY
-	bool "Factory Thingy:91 X partition layout"
+	bool "Factory Kestrel partition layout"
 	help
-	   The default Thingy:91 X partition layout used in the factory firmware. This ensures
-	   firmware updates are compatible with Thingy:91 X when flashing firmware over USB or over
+	   	  The default Kestrel partition layout used in the factory firmware. This ensures
+	  firmware updates are compatible with Kestrel when flashing firmware over USB or over
 	   the air.
 
 config KESTREL_NO_PREDEFINED_LAYOUT
@@ -22,7 +22,7 @@ config KESTREL_NO_PREDEFINED_LAYOUT
 	help
 	   Disable pre-defined static partition layout. This allows the application to use a dynamic
 	   layout or define a custom static partition layout for the application. A debugger is
-	   needed to flash Thingy:91 with a different partition layout.
+	  needed to flash Kestrel with a different partition layout.
 
 endchoice
 
@@ -40,5 +40,5 @@ config PM_OVERRIDE_EXTERNAL_DRIVER_CHECK
 config SECURE_BOOT_SIGNING_KEY_FILE
 	default "C:/Nordic/myApps/key_file/mcu_sign.pem"
 
-endif # BOARD_THINGY91X_NRF9151 || BOARD_THINGY91X_NRF9151_NS
+endif # BOARD_KESTREL_NRF9151 || BOARD_KESTREL_NRF9151_NS
 
