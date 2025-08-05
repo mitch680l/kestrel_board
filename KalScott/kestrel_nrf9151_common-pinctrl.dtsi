@@ -4,22 +4,7 @@
  */
 
 &pinctrl {
-	pwm0_default: pwm0_default {
-		group1 {
-			psels = <NRF_PSEL(PWM_OUT0, 0, 29)>,
-				<NRF_PSEL(PWM_OUT1, 0, 30)>,
-				<NRF_PSEL(PWM_OUT2, 0, 31)>;
-		};
-	};
-
-	pwm0_sleep: pwm0_sleep {
-		group1 {
-			psels = <NRF_PSEL(PWM_OUT0, 0, 29)>,
-				<NRF_PSEL(PWM_OUT1, 0, 30)>,
-				<NRF_PSEL(PWM_OUT2, 0, 31)>;
-			low-power-enable;
-		};
-	};
+	/* PWM0 pinctrl removed - RGB LEDs not present on standalone design */
 
 	i2c2_default: i2c2_default {
 		group1 {

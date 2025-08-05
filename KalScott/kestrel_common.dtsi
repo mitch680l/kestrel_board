@@ -83,19 +83,9 @@
 
 
 
-	/* AK09918C 3-axis magnetometer */
-	magnetometer: ak09918c@0c {
-		status = "disabled";
-		compatible = "asahi-kasei,akm09918c";
-		reg = <0x0c>;
-	};
-
-	/* BMP390 pressure sensor */
-	pressure: bmp390@76 {
-		status = "disabled";
-		compatible = "bosch,bmp390";
-		reg = <0x76>;
-	};
+	/* Sensor placeholder nodes - enable and configure when drivers are available */
+	/* magnetometer: ak09918c@0c - I2C address 0x0c */
+	/* pressure: bmp390@76 - I2C address 0x76 */
 };
 
 &spi3 {
@@ -124,11 +114,5 @@
 
 
 
-	/* ICM-42688-P 6-axis IMU */
-	imu: icm42688@2 {
-		compatible = "invensense,icm42688";
-		status = "disabled";
-		reg = <2>;
-		spi-max-frequency = <DT_FREQ_M(10)>;
-	};
+	/* imu: icm42688@2 - SPI device, reg=<2>, CS1 on GPIO0.22 */
 };

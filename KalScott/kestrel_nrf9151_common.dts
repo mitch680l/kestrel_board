@@ -19,55 +19,17 @@
 
 	buttons {
 		compatible = "gpio-keys";
-
 		button0: button_0 {
-			gpios = <&gpio0 26 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
-			label = "Button 1";
+			gpios = <&gpio0 26 (GPIO_PULL_DOWN | GPIO_ACTIVE_LOW)>;
+			label = "Virtual Button (always pressed - DFU mode)";
 		};
 	};
 
-	leds {
-		compatible = "gpio-leds";
-		red_led: led_1 {
-			gpios = <&gpio0 29 0>;
-			label = "RGB red channel";
-		};
-		green_led: led_2 {
-			gpios = <&gpio0 31 0>;
-			label = "RGB green channel";
-		};
-		blue_led: led_3 {
-			gpios = <&gpio0 30 0>;
-			label = "RGB blue channel";
-		};
-	};
-
-	pwmleds {
-		compatible = "pwm-leds";
-		pwm_led0: pwm_led_0 {
-			pwms = <&pwm0 0 PWM_MSEC(8) PWM_POLARITY_NORMAL>;
-		};
-		pwm_led1: pwm_led_1 {
-			pwms = <&pwm0 2 PWM_MSEC(8) PWM_POLARITY_NORMAL>;
-		};
-		pwm_led2: pwm_led_2 {
-			pwms = <&pwm0 1 PWM_MSEC(8) PWM_POLARITY_NORMAL>;
-		};
-	};
-	/* zephyr,user {
-		// nrf5340-reset-gpios removed - not applicable to standalone nRF9151
-	}; */
+	/* LEDs and PWM LEDs removed - not present on standalone design */
 
 	aliases {
-		sw0 = &button0;
-		led0 = &red_led;
-		led1 = &green_led;
-		led2 = &blue_led;
-		pwm-led0 = &pwm_led0;
-		pwm-led1 = &pwm_led1;
-		pwm-led2 = &pwm_led2;
-		rgb-pwm = &pwm0;
-		mcuboot-button0 = &button0;
+		sw0 = &button0;                
+		mcuboot-button0 = &button0;     
 		spi-flash0 = &flash_ext;
 	};
 };
@@ -94,26 +56,19 @@
 	*/
 };
 
-/* PWM0 is intended for RGB LED control */
+/* PWM0 disabled - RGB LEDs not present on standalone design */
 &pwm0 {
-	status = "okay";
-	pinctrl-0 = <&pwm0_default>;
-	pinctrl-1 = <&pwm0_sleep>;
-	pinctrl-names = "default", "sleep";
+	status = "disabled";
 };
 
 &pmic_main {
 	host-int-gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>; //INT1
 };
-/* Sensor interrupt pin assignments - disabled by default */
-&imu {
-	int1-gpios = <&gpio0 11 GPIO_ACTIVE_LOW>; //INT4 - ICM42688 INT1
-	// int2-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>; //INT2 - ICM42688 INT2 (optional)
-};
-/* AK09918C magnetometer - no interrupt pin used */
-&pressure {
-	int-gpios = <&gpio0 12 GPIO_ACTIVE_LOW>; //INT5 - BMP390 INT
-};
+/* Sensor interrupt pins available for future use:
+ * GPIO0.11 - IMU interrupt (INT4)
+ * GPIO0.12 - Pressure sensor interrupt (INT5) 
+ * GPIO0.7  - Available for sensor interrupts (INT3)
+ */
 
 &flash_ext {
 	status = "okay";

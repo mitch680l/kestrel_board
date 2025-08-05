@@ -22,7 +22,7 @@ config KESTREL_NO_PREDEFINED_LAYOUT
 	help
 	   Disable pre-defined static partition layout. This allows the application to use a dynamic
 	   layout or define a custom static partition layout for the application. A debugger is
-	   	  needed to flash Kestrel with a different partition layout.
+	  needed to flash Kestrel with a different partition layout.
 
 endchoice
 
