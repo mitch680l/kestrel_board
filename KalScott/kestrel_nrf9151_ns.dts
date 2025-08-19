@@ -30,10 +30,7 @@
 	status = "okay";
 };
 
-&uart0 {
-	compatible = "nordic,nrf-uarte";
-	current-speed = <115200>;
-};
+
 
 &systick {
 	status = "disabled";
