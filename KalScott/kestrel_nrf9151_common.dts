@@ -28,6 +28,7 @@
 		sw0 = &button0;                
 		mcuboot-button0 = &button0;     
 		spi-flash0 = &flash_ext;
+		i2c-bb = &i2c_bb0;
 	};
 };
 
@@ -37,6 +38,15 @@
 
 &gpiote {
 	status = "okay";
+};
+
+&i2c_bb0: i2c@0 {
+    compatible = "gpio-i2c";
+    status = "okay";
+    scl-gpios = <&gpio0 9 (GPIO_OPEN_DRAIN | GPIO_PULL_UP)>;
+    sda-gpios = <&gpio0 8 (GPIO_OPEN_DRAIN | GPIO_PULL_UP)>;
+    clock-frequency = <I2C_BITRATE_STANDARD>; 
+    label = "I2C_BB0"; 
 };
 
 &gpio0 {
@@ -61,16 +71,11 @@
 &pmic_main {
 	
 };
-/* Sensor interrupt pins available for future use:
- * GPIO0.11 - IMU interrupt (INT4)
- * GPIO0.12 - Pressure sensor interrupt (INT5) 
- * GPIO0.7  - Available for sensor interrupts (INT3)
- */
+
 
 &flash_ext {
 	status = "okay";
 };
-
 
 
 &i2c1 {
@@ -84,6 +89,7 @@
 &spi3 {
 	status = "okay";
 	cs-gpios = <&gpio0 10 GPIO_ACTIVE_LOW>, // FLASH_CS (CS0)
+		 <&gpio0 14 GPIO_ACTIVE_LOW>,  // SPI INTERFACE (EXPANSION) (CS2)
 		   <&gpio0 7 GPIO_ACTIVE_LOW>; // ICM42688_CS (CS1)
 };
 
