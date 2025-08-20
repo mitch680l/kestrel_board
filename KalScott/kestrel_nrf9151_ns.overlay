@@ -11,16 +11,9 @@
 };
 
 
-/ {
 
-	aliases {
-		temp-sensor = &bme680;
-	};
-};
 
-&bme680 {
-	status = "okay";
-};
+
 
 &pmic_main {
 	status = "okay";
