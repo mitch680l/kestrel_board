@@ -72,29 +72,36 @@ tfm:
   address: 0x30200
   size: 0x17e00
   region: flash_primary
+
 tfm_nonsecure:
-  address: 0x48000
-  size: 0xb6000
+  address: 0x00048000
+  size:   0x000b0000 
   span: [app]
   region: flash_primary
+
 app:
   address: 0x00048000
-  size:   0x000b7400
+  size:   0x000b0000 
   region: flash_primary
 
 encrypted_blob_slot0:
-  address: 0x000fb000  
-  size:   0x00002000
+  address: 0x000f8000
+  size:   0x00003000
   region: flash_primary
 
 encrypted_blob_pad:
-  address: 0x000fd000
-  size:   0x00001000
+  address: 0x000fb000
+  size:   0x00001000 
   region: flash_primary
 
 encrypted_blob_slot1:
-  address: 0x000fe000
-  size:   0x00002000  
+  address: 0x000fc000
+  size:   0x00003000 
+  region: flash_primary
+
+encrypted_blob_end_pad:
+  address: 0x000ff000
+  size:   0x00001000 
   region: flash_primary
 
 mcuboot_secondary:
