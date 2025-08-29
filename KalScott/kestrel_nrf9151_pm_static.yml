@@ -75,8 +75,9 @@ tfm:
 
 tfm_nonsecure:
   address: 0x00048000
-  size:   0x000b0000 
-  span: [app]
+  size:   0x000B8000
+  span: [app, encrypted_blob_slot0, encrypted_blob_pad,
+         encrypted_blob_slot1, encrypted_blob_end_pad]
   region: flash_primary
 
 app:
